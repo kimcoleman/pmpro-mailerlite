@@ -148,7 +148,7 @@ function pmpromailerlite_sync_subscriber_for_user( $user_id, $update_groups = tr
 	);
 
 	// Optionally bypass double opt-in by setting status to Active.
-	$status_mode = isset( $options['subscriber_status_mode'] ) ? $options['subscriber_status_mode'] : 'active';
+	$status_mode = isset( $options['subscriber_status_mode'] ) ? $options['subscriber_status_mode'] : 'respect';
 	if ( 'active' === $status_mode ) {
 		$subscriber_data['status'] = 'active';
 	}

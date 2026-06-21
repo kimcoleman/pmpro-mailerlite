@@ -48,7 +48,7 @@ function pmpromailerlite_settings_page() {
 		$options['api_key']                = $new_api_key;
 		$options['update_on_profile_save'] = empty( $_POST['update_on_profile_save'] ) ? 'yes' : sanitize_text_field( wp_unslash( $_POST['update_on_profile_save'] ) );
 		$options['unsubscribe']            = empty( $_POST['unsubscribe'] ) ? 'yes' : sanitize_text_field( wp_unslash( $_POST['unsubscribe'] ) );
-		$options['subscriber_status_mode'] = empty( $_POST['subscriber_status_mode'] ) ? 'active' : sanitize_text_field( wp_unslash( $_POST['subscriber_status_mode'] ) );
+		$options['subscriber_status_mode'] = empty( $_POST['subscriber_status_mode'] ) ? 'respect' : sanitize_text_field( wp_unslash( $_POST['subscriber_status_mode'] ) );
 		$options['enable_async']           = empty( $_POST['enable_async'] ) ? 'yes' : sanitize_text_field( wp_unslash( $_POST['enable_async'] ) );
 		$options['enable_debug_log']       = empty( $_POST['enable_debug_log'] ) ? 'no' : sanitize_text_field( wp_unslash( $_POST['enable_debug_log'] ) );
 
@@ -143,13 +143,13 @@ function pmpromailerlite_settings_page() {
 							<th scope="row"><label for="subscriber_status_mode"><?php esc_html_e( 'Subscriber Status', 'pmpro-mailerlite' ); ?></label></th>
 							<td>
 								<?php
-								$subscriber_status_mode = isset( $options['subscriber_status_mode'] ) ? $options['subscriber_status_mode'] : 'active';
+								$subscriber_status_mode = isset( $options['subscriber_status_mode'] ) ? $options['subscriber_status_mode'] : 'respect';
 								?>
 								<select name="subscriber_status_mode" id="subscriber_status_mode">
-									<option value="active" <?php selected( $subscriber_status_mode, 'active' ); ?>><?php esc_html_e( 'Always set to Active (bypasses double opt-in)', 'pmpro-mailerlite' ); ?></option>
 									<option value="respect" <?php selected( $subscriber_status_mode, 'respect' ); ?>><?php esc_html_e( 'Respect account settings (honor double opt-in)', 'pmpro-mailerlite' ); ?></option>
+									<option value="active" <?php selected( $subscriber_status_mode, 'active' ); ?>><?php esc_html_e( 'Always set to Active (bypasses double opt-in)', 'pmpro-mailerlite' ); ?></option>
 								</select>
-								<p class="description"><?php esc_html_e( 'Controls whether new subscribers are set to Active immediately or follow your MailerLite account\'s double opt-in settings.', 'pmpro-mailerlite' ); ?></p>
+								<p class="description"><?php esc_html_e( 'Controls how new subscribers are confirmed. Respect account settings honors your MailerLite double opt-in configuration: if double opt-in is enabled in MailerLite, members receive a confirmation email before they are subscribed. Always set to Active subscribes members immediately and bypasses double opt-in.', 'pmpro-mailerlite' ); ?></p>
 							</td>
 						</tr>
 						<tr>
