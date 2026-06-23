@@ -5,7 +5,7 @@
  * Handles syncing membership level changes and profile updates
  * to MailerLite groups.
  *
- * @since 1.0
+ * @since 0.1
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -17,7 +17,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Get the location of the PMPro MailerLite log file.
  *
- * @since 1.0
+ * @since 0.1
  *
  * @return string The log file path.
  */
@@ -28,7 +28,7 @@ function pmpromailerlite_get_log_file_path() {
 /**
  * Maybe add an entry to the debug log.
  *
- * @since 1.0
+ * @since 0.1
  *
  * @param string $message The log message.
  */
@@ -55,7 +55,7 @@ function pmpromailerlite_debug_log( $message ) {
 /**
  * Enqueue a sync for a user, either via Action Scheduler or immediately.
  *
- * @since 1.0
+ * @since 0.1
  *
  * @param int  $user_id       WordPress user ID.
  * @param bool $update_groups Whether to sync group memberships.
@@ -90,7 +90,7 @@ add_action( 'pmpromailerlite_sync_subscriber_for_user', 'pmpromailerlite_sync_su
  * Creates or updates the subscriber and manages group memberships
  * based on their current membership levels.
  *
- * @since 1.0
+ * @since 0.1
  *
  * @param int  $user_id       WordPress user ID.
  * @param bool $update_groups Whether to sync group memberships.
@@ -156,7 +156,7 @@ function pmpromailerlite_sync_subscriber_for_user( $user_id, $update_groups = tr
 	/**
 	 * Filter subscriber data before sending to MailerLite.
 	 *
-	 * @since 1.0
+	 * @since 0.1
 	 *
 	 * @param array   $subscriber_data Data for the upsert.
 	 * @param WP_User $user            The WordPress user.
@@ -206,7 +206,7 @@ function pmpromailerlite_sync_subscriber_for_user( $user_id, $update_groups = tr
 		 * Only PMPro-controlled groups are removed when a member loses a level.
 		 * Groups not in this list are preserved even during level changes.
 		 *
-		 * @since 1.0
+		 * @since 0.1
 		 *
 		 * @param array $controlled_group_ids All configured group IDs.
 		 */
@@ -237,7 +237,7 @@ function pmpromailerlite_sync_subscriber_for_user( $user_id, $update_groups = tr
 /**
  * Get all group IDs configured across all membership levels.
  *
- * @since 1.0
+ * @since 0.1
  *
  * @return array
  */
@@ -271,7 +271,7 @@ function pmpromailerlite_get_controlled_group_ids() {
  *
  * Fires after the membership level change is confirmed.
  *
- * @since 1.0
+ * @since 0.1
  *
  * @param array $old_users_and_levels Array of user IDs and their old levels.
  */
@@ -289,7 +289,7 @@ add_action( 'pmpro_after_all_membership_level_changes', 'pmpromailerlite_sync_us
 /**
  * When a user's profile is updated, sync their data to MailerLite.
  *
- * @since 1.0
+ * @since 0.1
  *
  * @param int $user_id WordPress user ID.
  */
@@ -312,7 +312,7 @@ add_action( 'profile_update', 'pmpromailerlite_sync_user_on_profile_update', 10,
  *
  * Runs at priority 20 to fire after PMPro's save at priority 10.
  *
- * @since 1.0
+ * @since 0.1
  */
 function pmpromailerlite_sync_user_on_edit_member_user_fields_save() {
 	if ( empty( $_REQUEST['page'] ) || 'pmpro-member' !== $_REQUEST['page'] ) {

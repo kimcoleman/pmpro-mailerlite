@@ -2,7 +2,7 @@
 /**
  * Admin settings page.
  *
- * @since 1.0
+ * @since 0.1
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Add MailerLite settings link to PMPro settings menu.
  *
- * @since 1.0
+ * @since 0.1
  */
 function pmpromailerlite_admin_menu() {
 	add_submenu_page(
@@ -27,7 +27,7 @@ add_action( 'admin_menu', 'pmpromailerlite_admin_menu' );
 /**
  * Render the MailerLite settings page.
  *
- * @since 1.0
+ * @since 0.1
  */
 function pmpromailerlite_settings_page() {
 	// Get existing options.

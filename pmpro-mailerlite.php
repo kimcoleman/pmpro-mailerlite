@@ -25,7 +25,7 @@ define( 'PMPROMAILERLITE_BASENAME', plugin_basename( __FILE__ ) );
 /**
  * Load plugin files after all plugins have loaded.
  *
- * @since 1.0
+ * @since 0.1
  */
 function pmpromailerlite_load_plugin() {
 	if ( ! defined( 'PMPRO_VERSION' ) ) {
@@ -41,7 +41,7 @@ add_action( 'plugins_loaded', 'pmpromailerlite_load_plugin' );
 /**
  * Show a notice after the plugin is activated.
  *
- * @since 1.0
+ * @since 0.1
  */
 function pmpromailerlite_activation() {
 	set_transient( 'pmpromailerlite-admin-notice', true, 5 );
@@ -51,7 +51,7 @@ register_activation_hook( __FILE__, 'pmpromailerlite_activation' );
 /**
  * Admin notice on activation.
  *
- * @since 1.0
+ * @since 0.1
  */
 function pmpromailerlite_admin_notice() {
 	if ( get_transient( 'pmpromailerlite-admin-notice' ) ) {
@@ -75,7 +75,7 @@ add_action( 'admin_notices', 'pmpromailerlite_admin_notice' );
 /**
  * Add a Settings link to the plugin action links.
  *
- * @since 1.0
+ * @since 0.1
  *
  * @param array $links Array of links.
  * @return array
@@ -94,7 +94,7 @@ add_filter( 'plugin_action_links_' . PMPROMAILERLITE_BASENAME, 'pmpromailerlite_
 /**
  * Add Docs and Support links to the plugin row meta.
  *
- * @since 1.0
+ * @since 0.1
  *
  * @param array  $links Array of links.
  * @param string $file  Plugin basename.
@@ -115,7 +115,7 @@ add_filter( 'plugin_row_meta', 'pmpromailerlite_plugin_row_meta', 10, 2 );
 /**
  * Show an admin notice if PMPro is not active.
  *
- * @since 1.0
+ * @since 0.1
  */
 function pmpromailerlite_admin_notice_no_pmpro() {
 	if ( defined( 'PMPRO_VERSION' ) ) {
