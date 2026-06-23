@@ -5,7 +5,7 @@
  * Uses the MailerLite "new" API (connect.mailerlite.com/api).
  * Authentication is a simple Bearer token (API key).
  *
- * @since 1.0
+ * @since 0.1
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -50,7 +50,7 @@ class PMPro_MailerLite_API {
 	/**
 	 * Get singleton instance.
 	 *
-	 * @since 1.0
+	 * @since 0.1
 	 *
 	 * @return PMPro_MailerLite_API
 	 */
@@ -75,7 +75,7 @@ class PMPro_MailerLite_API {
 	/**
 	 * Check if the API is connected (key is set).
 	 *
-	 * @since 1.0
+	 * @since 0.1
 	 *
 	 * @return bool
 	 */
@@ -86,7 +86,7 @@ class PMPro_MailerLite_API {
 	/**
 	 * Make an API request.
 	 *
-	 * @since 1.0
+	 * @since 0.1
 	 *
 	 * @param string $endpoint Relative endpoint (e.g. '/subscribers').
 	 * @param string $method   HTTP method.
@@ -138,7 +138,7 @@ class PMPro_MailerLite_API {
 		if ( 429 === $code ) {
 			$retry_after = wp_remote_retrieve_header( $response, 'retry-after' );
 			pmpromailerlite_debug_log( "Rate limited ({$method} {$endpoint}). Retry-After: {$retry_after}" );
-			return new WP_Error( 'rate_limited', __( 'MailerLite API rate limit reached. The request will be retried.', 'pmpro-mailerlite' ), array( 'status' => 429, 'retry_after' => $retry_after ) );
+			return new WP_Error( 'rate_limited', __( 'MailerLite API rate limit reached. Please try again later.', 'pmpro-mailerlite' ), array( 'status' => 429, 'retry_after' => $retry_after ) );
 		}
 
 		if ( $code < 200 || $code >= 300 ) {
@@ -157,7 +157,7 @@ class PMPro_MailerLite_API {
 	/**
 	 * Get all groups from MailerLite with transient caching.
 	 *
-	 * @since 1.0
+	 * @since 0.1
 	 *
 	 * @param bool $force_refresh Skip the cache.
 	 * @return array
@@ -220,7 +220,7 @@ class PMPro_MailerLite_API {
 	/**
 	 * Remove a subscriber from a group.
 	 *
-	 * @since 1.0
+	 * @since 0.1
 	 *
 	 * @param string $subscriber_id Subscriber ID.
 	 * @param string $group_id      Group ID.
@@ -240,42 +240,12 @@ class PMPro_MailerLite_API {
 	 * POST /subscribers is a non-destructive upsert in MailerLite —
 	 * omitted fields and groups are not removed.
 	 *
-	 * @since 1.0
+	 * @since 0.1
 	 *
 	 * @param array $subscriber_data Subscriber data.
 	 * @return array|WP_Error Response data.
 	 */
 	public function upsert_subscriber( $subscriber_data ) {
 		return $this->request( '/subscribers', 'POST', $subscriber_data );
-	}
-
-	/**
-	 * Get a subscriber by email.
-	 *
-	 * @since 1.0
-	 *
-	 * @param string $email Email address.
-	 * @return array|null Subscriber data or null if not found.
-	 */
-	public function get_subscriber_by_email( $email ) {
-		$result = $this->request( '/subscribers/' . rawurlencode( $email ), 'GET' );
-
-		if ( is_wp_error( $result ) ) {
-			return null;
-		}
-
-		return ! empty( $result['data'] ) ? $result['data'] : null;
-	}
-
-	/**
-	 * Delete a subscriber.
-	 *
-	 * @since 1.0
-	 *
-	 * @param string $subscriber_id Subscriber ID.
-	 * @return array|WP_Error
-	 */
-	public function delete_subscriber( $subscriber_id ) {
-		return $this->request( '/subscribers/' . $subscriber_id, 'DELETE' );
 	}
 }

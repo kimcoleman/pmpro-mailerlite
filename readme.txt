@@ -18,16 +18,16 @@ This plugin integrates Paid Memberships Pro with MailerLite using the MailerLite
 
 * **Simple API Key Authentication** — Just paste your API key from the MailerLite dashboard.
 * **Group Management** — Assign MailerLite groups to each membership level. Members are automatically added when they gain a level and optionally removed when they lose it.
-* **Non-Member Groups** — Automatically subscribe new users without a membership level to designated groups.
-* **Custom Fields** — Membership level ID and name are stored as custom fields on each subscriber.
+* **Double Opt-In Support** — Honor your MailerLite account's double opt-in setting so new subscribers confirm by email, or set them to active immediately.
 * **Profile Sync** — Optionally sync subscriber data when a user updates their WordPress profile.
 * **Background Processing** — Uses PMPro Action Scheduler for non-blocking sync operations.
-* **Developer Friendly** — Filter hooks for customizing subscriber data and fields.
+* **Developer Friendly** — Filter hooks for customizing subscriber data.
 
 = Hooks =
 
-* `pmproml_subscriber_data` — Modify subscriber data before sending to MailerLite.
-* `pmproml_subscriber_fields` — Add or modify fields sent with the subscriber.
+* `pmpromailerlite_subscriber_data` — Modify subscriber data before sending to MailerLite.
+* `pmpromailerlite_controlled_group_ids` — Filter which MailerLite group IDs are managed by PMPro and eligible for removal.
+* `pmpromailerlite_log_file_path` — Filter the path to the debug log file.
 
 == Installation ==
 
@@ -52,20 +52,23 @@ Groups in MailerLite are equivalent to lists or audiences in other email marketi
 
 = Does this sync existing members? =
 
-The plugin syncs members when their membership level changes or when they update their profile. To sync all existing members, trigger a profile save or use a bulk sync tool.
+The plugin syncs each member when their membership level changes or when they update their profile, so your audience self-populates over time. There is no built-in bulk sync for members who already exist. To add your current members all at once, export your Members List (Memberships > Members) to a CSV and import it into MailerLite.
+
+= Does this work with MailerLite double opt-in? =
+
+Yes. The Subscriber Status setting controls this. Choose "Respect account settings" (the default) to honor your MailerLite account's double opt-in configuration — new subscribers receive MailerLite's confirmation email before they are subscribed. Choose "Always set to Active" to subscribe members immediately and bypass double opt-in.
 
 = What happens when a member cancels? =
 
-Depending on your settings, the member can be removed from the groups associated with their old level. If non-member groups are configured, they will be added to those instead.
+Depending on the "Remove Groups When Membership Changes" setting, the member is removed from the MailerLite groups associated with the level they lost. Groups you assign manually in MailerLite are preserved.
 
 == Changelog ==
 
-= 0.1 - 2026-04-13 =
+= 0.1 - 2026-06-21 =
 * Initial release.
 * MailerLite API integration with Bearer token authentication.
 * Group assignment per membership level.
-* Non-member group support.
-* Custom fields for membership level data.
+* Subscriber status control with MailerLite double opt-in support.
 * Background sync via PMPro Action Scheduler.
 * Profile update sync (configurable).
 * Debug logging.
