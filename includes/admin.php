@@ -2,7 +2,7 @@
 /**
  * Admin settings page.
  *
- * @since 0.1
+ * @since 1.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Add MailerLite settings link to PMPro settings menu.
  *
- * @since 0.1
+ * @since 1.0
  */
 function pmpromailerlite_admin_menu() {
 	add_submenu_page(
@@ -27,7 +27,7 @@ add_action( 'admin_menu', 'pmpromailerlite_admin_menu' );
 /**
  * Render the MailerLite settings page.
  *
- * @since 0.1
+ * @since 1.0
  */
 function pmpromailerlite_settings_page() {
 	// Get existing options.
@@ -84,7 +84,7 @@ function pmpromailerlite_settings_page() {
 		<h1><?php esc_html_e( 'MailerLite Settings', 'pmpro-mailerlite' ); ?></h1>
 		<p>
 			<?php
-			$docs_link = '<a title="' . esc_attr__( 'Paid Memberships Pro - MailerLite Add On Documentation', 'pmpro-mailerlite' ) . '" target="_blank" rel="nofollow noopener" href="https://www.paidmembershipspro.com/add-ons/pmpro-mailerlite/?utm_source=plugin&utm_medium=pmpro-mailerlite&utm_campaign=add-ons&utm_content=pmpro-mailerlite-settings">' . esc_html__( 'MailerLite Add On documentation', 'pmpro-mailerlite' ) . '</a>';
+			$docs_link = '<a title="' . esc_attr__( 'Paid Memberships Pro - MailerLite Add On Documentation', 'pmpro-mailerlite' ) . '" target="_blank" rel="nofollow noopener" href="https://www.paidmembershipspro.com/add-ons/mailerlite-integration/?utm_source=plugin&utm_medium=pmpro-mailerlite&utm_campaign=add-ons&utm_content=pmpro-mailerlite-settings">' . esc_html__( 'MailerLite Add On documentation', 'pmpro-mailerlite' ) . '</a>';
 			// translators: %s: Link to MailerLite Add On documentation.
 			printf( esc_html__( 'Learn more about these settings in the %s.', 'pmpro-mailerlite' ), $docs_link ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			?>

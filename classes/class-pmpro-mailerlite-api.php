@@ -5,7 +5,7 @@
  * Uses the MailerLite "new" API (connect.mailerlite.com/api).
  * Authentication is a simple Bearer token (API key).
  *
- * @since 0.1
+ * @since 1.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -50,7 +50,7 @@ class PMPro_MailerLite_API {
 	/**
 	 * Get singleton instance.
 	 *
-	 * @since 0.1
+	 * @since 1.0
 	 *
 	 * @return PMPro_MailerLite_API
 	 */
@@ -75,7 +75,7 @@ class PMPro_MailerLite_API {
 	/**
 	 * Check if the API is connected (key is set).
 	 *
-	 * @since 0.1
+	 * @since 1.0
 	 *
 	 * @return bool
 	 */
@@ -86,7 +86,7 @@ class PMPro_MailerLite_API {
 	/**
 	 * Make an API request.
 	 *
-	 * @since 0.1
+	 * @since 1.0
 	 *
 	 * @param string $endpoint Relative endpoint (e.g. '/subscribers').
 	 * @param string $method   HTTP method.
@@ -157,7 +157,7 @@ class PMPro_MailerLite_API {
 	/**
 	 * Get all groups from MailerLite with transient caching.
 	 *
-	 * @since 0.1
+	 * @since 1.0
 	 *
 	 * @param bool $force_refresh Skip the cache.
 	 * @return array
@@ -220,7 +220,7 @@ class PMPro_MailerLite_API {
 	/**
 	 * Remove a subscriber from a group.
 	 *
-	 * @since 0.1
+	 * @since 1.0
 	 *
 	 * @param string $subscriber_id Subscriber ID.
 	 * @param string $group_id      Group ID.
@@ -240,7 +240,7 @@ class PMPro_MailerLite_API {
 	 * POST /subscribers is a non-destructive upsert in MailerLite —
 	 * omitted fields and groups are not removed.
 	 *
-	 * @since 0.1
+	 * @since 1.0
 	 *
 	 * @param array $subscriber_data Subscriber data.
 	 * @return array|WP_Error Response data.

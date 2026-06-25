@@ -1,14 +1,14 @@
 <?php
 /**
  * Plugin Name: Paid Memberships Pro - MailerLite Add On
- * Plugin URI: https://www.paidmembershipspro.com/add-ons/pmpro-mailerlite/
+ * Plugin URI: https://www.paidmembershipspro.com/add-ons/mailerlite-integration/
  * Description: Connect Paid Memberships Pro to MailerLite to add members as subscribers and manage groups automatically.
- * Version: 0.1
+ * Version: 1.0
  * Author: Paid Memberships Pro
  * Author URI: https://www.paidmembershipspro.com
  * Text Domain: pmpro-mailerlite
  * Domain Path: /languages
- * License: GPL-2.0+
+ * License: GPL-3.0+
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  *
  * Requires PHP: 7.4
@@ -18,14 +18,14 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'PMPROMAILERLITE_VERSION', '0.1' );
+define( 'PMPROMAILERLITE_VERSION', '1.0' );
 define( 'PMPROMAILERLITE_DIR', plugin_dir_path( __FILE__ ) );
 define( 'PMPROMAILERLITE_BASENAME', plugin_basename( __FILE__ ) );
 
 /**
  * Load plugin files after all plugins have loaded.
  *
- * @since 0.1
+ * @since 1.0
  */
 function pmpromailerlite_load_plugin() {
 	if ( ! defined( 'PMPRO_VERSION' ) ) {
@@ -41,7 +41,7 @@ add_action( 'plugins_loaded', 'pmpromailerlite_load_plugin' );
 /**
  * Show a notice after the plugin is activated.
  *
- * @since 0.1
+ * @since 1.0
  */
 function pmpromailerlite_activation() {
 	set_transient( 'pmpromailerlite-admin-notice', true, 5 );
@@ -51,7 +51,7 @@ register_activation_hook( __FILE__, 'pmpromailerlite_activation' );
 /**
  * Admin notice on activation.
  *
- * @since 0.1
+ * @since 1.0
  */
 function pmpromailerlite_admin_notice() {
 	if ( get_transient( 'pmpromailerlite-admin-notice' ) ) {
@@ -75,7 +75,7 @@ add_action( 'admin_notices', 'pmpromailerlite_admin_notice' );
 /**
  * Add a Settings link to the plugin action links.
  *
- * @since 0.1
+ * @since 1.0
  *
  * @param array $links Array of links.
  * @return array
@@ -94,7 +94,7 @@ add_filter( 'plugin_action_links_' . PMPROMAILERLITE_BASENAME, 'pmpromailerlite_
 /**
  * Add Docs and Support links to the plugin row meta.
  *
- * @since 0.1
+ * @since 1.0
  *
  * @param array  $links Array of links.
  * @param string $file  Plugin basename.
@@ -103,7 +103,7 @@ add_filter( 'plugin_action_links_' . PMPROMAILERLITE_BASENAME, 'pmpromailerlite_
 function pmpromailerlite_plugin_row_meta( $links, $file ) {
 	if ( strpos( $file, 'pmpro-mailerlite.php' ) !== false ) {
 		$new_links = array(
-			'<a href="https://www.paidmembershipspro.com/add-ons/pmpro-mailerlite/" title="' . esc_attr__( 'View Documentation', 'pmpro-mailerlite' ) . '">' . esc_html__( 'Docs', 'pmpro-mailerlite' ) . '</a>',
+			'<a href="https://www.paidmembershipspro.com/add-ons/mailerlite-integration/" title="' . esc_attr__( 'View Documentation', 'pmpro-mailerlite' ) . '">' . esc_html__( 'Docs', 'pmpro-mailerlite' ) . '</a>',
 			'<a href="https://www.paidmembershipspro.com/support/" title="' . esc_attr__( 'Visit Customer Support Forum', 'pmpro-mailerlite' ) . '">' . esc_html__( 'Support', 'pmpro-mailerlite' ) . '</a>',
 		);
 		$links = array_merge( $links, $new_links );
@@ -115,7 +115,7 @@ add_filter( 'plugin_row_meta', 'pmpromailerlite_plugin_row_meta', 10, 2 );
 /**
  * Show an admin notice if PMPro is not active.
  *
- * @since 0.1
+ * @since 1.0
  */
 function pmpromailerlite_admin_notice_no_pmpro() {
 	if ( defined( 'PMPRO_VERSION' ) ) {
